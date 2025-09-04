@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fruitables - Organic Veggies & Fruits Foods</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Custom scrollbar styling for product lists */
+    ::-webkit-scrollbar {
+      height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #84cc16;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e5e7eb;
+    }
+    /* Carousel controls */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .carousel-slide {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      will-change: transform;
+    }
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #84cc16;
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      color: #fff;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+      z-index: 10;
+    }
+    .carousel-button:hover {
+      opacity: 1;
+    }
+    .carousel-button.left {
+      left: 0.5rem;
+    }
+    .carousel-button.right {
+      right: 0.5rem;
+    }
+    /* Search input focus styling */
+    input[type="search"] {
+      transition: box-shadow 0.3s ease;
+    }
+    input[type="search"]:focus {
+      box-shadow: 0 0 0 3px #84cc16aa;
+      outline: none;
+    }
+    /* Card hover effect for product cards */
+    .product-card:hover {
+      box-shadow: 0 8px 15px rgba(132, 204, 22, 0.4);
+      transform: translateY(-4px);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans select-none">
+
+  <!-- Top Green Bar with contact and policy links -->
+  <div class="bg-lime-600 text-white text-sm py-1 px-4 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0 font-semibold">
+    <div class="flex items-center space-x-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-lime-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 01-5.656 0L6 10.657" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 7a7 7 0 0110 10" />
+      </svg>
+      <span>123 Street, New York</span>
+      <span>|</span>
+      <a href="mailto:Email@Example.com" class="hover:underline">Email@Example.com</a>
+    </div>
+    <div class="flex items-center space-x-4 text-xs sm:text-sm">
+      <a href="#" class="hover:underline">Privacy Policy</a>
+      <span>|</span>
+      <a href="#" class="hover:underline">Terms of Use</a>
+      <span>|</span>
+      <a href="#" class="hover:underline">Sales and Refunds</a>
+    </div>
+  </div>
+
+  <!-- Header navigation -->
+  <header class="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <h1 class="text-3xl font-extrabold text-lime-600 select-text">Fruitables</h1>
+    </div>
+    <nav class="mt-4 sm:mt-0">
+      <ul class="flex space-x-8 text-gray-600 font-semibold text-sm sm:text-base">
+        <li><a href="#" class="hover:text-lime-600 transition">Home</a></li>
+        <li><a href="#" class="hover:text-lime-600 transition">Shop</a></li>
+        <li><a href="#" class="hover:text-lime-600 transition">Shop Detail</a></li>
+        <li class="relative group">
+          <button class="flex items-center space-x-1 hover:text-lime-600 transition">
+            <span>Pages</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <!-- Dropdown placeholder (hidden) -->
+          <ul class="absolute top-full left-0 mt-1 bg-white border border-gray-200 shadow-lg rounded-md opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity text-sm">
+            <li><a href="#" class="block px-4 py-2 hover:bg-lime-50">Page 1</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-lime-50">Page 2</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-lime-50">Page 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="hover:text-lime-600 transition">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="flex space-x-5 mt-5 sm:mt-0 items-center text-gray-600">
+      <button aria-label="Search" class="hover:text-lime-600 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button aria-label="Cart" class="hover:text-lime-600 transition relative">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke-linejoin="round" />
+          <circle cx="7" cy="21" r="1" />
+          <circle cx="17" cy="21" r="1" />
+        </svg>
+        <span class="absolute -top-1 -right-2 bg-lime-600 text-white text-xs rounded-full px-1.5 font-bold">3</span>
+      </button>
+      <button aria-label="User Account" class="hover:text-lime-600 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="7" r="4" />
+          <path d="M5.5 21a6.5 6.5 0 0113 0" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero section -->
+  <section class="max-w-7xl mx-auto px-4 flex flex-col-reverse md:flex-row items-center gap-8 py-12">
+    <div class="flex-1">
+      <p class="text-lg text-lime-600 font-semibold mb-2">100% Organic Foods</p>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-lime-600 leading-tight mb-6">Organic Veggies & Fruits Foods</h2>
+      <form class="flex max-w-md" onsubmit="event.preventDefault();">
+        <input type="search" placeholder="Search" aria-label="Search products" required
+          class="flex-grow border border-lime-600 rounded-l-full px-4 py-2 text-gray-800 focus:ring-0 focus:outline-none" />
+        <button type="submit" class="bg-lime-600 text-white font-semibold px-5 py-2 rounded-r-full hover:bg-lime-700 transition">Submit Now</button>
+      </form>
+    </div>
+    <div class="flex-1 max-w-md carousel-container shadow-lg bg-lime-400">
+      <div class="carousel-slide" id="heroCarousel" style="transform: translateX(0);">
+        <div class="relative min-w-full flex-shrink-0 p-4">
+          <img src="https://placehold.co/600x400/84cc16/fff?text=Fruits+Basket+with+Vegetables" alt="Basket full of bright fresh fruits and vegetables with bottles on yellow-green background" class="rounded-lg object-cover w-full h-64 md:h-80" />
+          <div class="absolute bottom-4 left-4 font-semibold text-white bg-lime-700 bg-opacity-75 px-3 py-1 rounded">Fruites</div>
+        </div>
+        <div class="relative min-w-full flex-shrink-0 p-4">
+          <img src="https://placehold.co/600x400/6ee7b7/114c41?text=Fresh+Organic+Veggies" alt="Variety of fresh organic vegetables on green background with natural lighting" class="rounded-lg object-cover w-full h-64 md:h-80" />
+          <div class="absolute bottom-4 left-4 font-semibold text-white bg-lime-700 bg-opacity-75 px-3 py-1 rounded">Vegetables</div>
+        </div>
+        <div class="relative min-w-full flex-shrink-0 p-4">
+          <img src="https://placehold.co/600x400/fef3c7/92400e?text=Organic+Fruit+Assortment" alt="Close-up macro shot of assorted organic fruits beautifully arranged with sunlight" class="rounded-lg object-cover w-full h-64 md:h-80" />
+          <div class="absolute bottom-4 left-4 font-semibold text-white bg-lime-700 bg-opacity-75 px-3 py-1 rounded">Organic Fruits</div>
+        </div>
+      </div>
+      <button class="carousel-button left" aria-label="Previous Slide" onclick="moveSlide(-1)">❮</button>
+      <button class="carousel-button right" aria-label="Next Slide" onclick="moveSlide(1)">❯</button>
+    </div>
+  </section>
+
+  <!-- Features section -->
+  <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-10">
+    <div class="p-5 bg-gray-100 rounded-lg flex flex-col items-center text-center space-y-4">
+      <div class="bg-yellow-400 rounded-full p-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h18M10 11h4M7 15h10" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20 21V7a2 2 0 00-2-2H6a2 2 0 00-2 2v14" />
+        </svg>
+      </div>
+      <h4 class="font-semibold text-lg text-gray-700">Free Shipping</h4>
+      <p class="text-gray-500 text-sm max-w-xs">Free on order over $300</p>
+    </div>
+    <div class="p-5 bg-gray-100 rounded-lg flex flex-col items-center text-center space-y-4">
+      <div class="bg-yellow-400 rounded-full p-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c.667 0 1-.333 1-1v-2a1 1 0 01.993-.883L14 7a1 1 0 011 1v3a3 3 0 01-1 2.246M10 7v2a1 1 0 001 1" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h.01M7 20h.01M12 20h.01" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2" />
+        </svg>
+      </div>
+      <h4 class="font-semibold text-lg text-gray-700">Security Payment</h4>
+      <p class="text-gray-500 text-sm max-w-xs">100% security payment</p>
+    </div>
+    <div class="p-5 bg-gray-100 rounded-lg flex flex-col items-center text-center space-y-4">
+      <div class="bg-yellow-400 rounded-full p-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M3 16l7.89-5.26a2 2 0 012.22 0L21 16" />
+        </svg>
+      </div>
+      <h4 class="font-semibold text-lg text-gray-700">30 Day Return</h4>
+      <p class="text-gray-500 text-sm max-w-xs">30 day money guarantee</p>
+    </div>
+    <div class="p-5 bg-gray-100 rounded-lg flex flex-col items-center text-center space-y-4">
+      <div class="bg-yellow-400 rounded-full p-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18 2a1 1 0 011 1v7a1 1 0 01-2 0V7l-6 6-4-4-6 6" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 13h2a1 1 0 010 2h-2a1 1 0 010-2z" />
+        </svg>
+      </div>
+      <h4 class="font-semibold text-lg text-gray-700">24/7 Support</h4>
+      <p class="text-gray-500 text-sm max-w-xs">Support every time fast</p>
+    </div>
+  </section>
+
+  <!-- Organic Products section -->
+  <section class="max-w-7xl mx-auto px-4 pb-16">
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-8">
+      <h3 class="text-gray-800 font-semibold text-2xl select-text">Our Organic Products</h3>
+      <nav class="flex space-x-4 text-sm font-semibold select-none">
+        <button aria-pressed="true" class="px-4 py-1 rounded-full bg-lime-500 text-white hover:bg-lime-600 transition focus:outline-none focus:ring-2 focus:ring-lime-400">All Products</button>
+        <button aria-pressed="false" class="px-4 py-1 rounded-full bg-gray-200 text-gray-600 hover:bg-lime-100 hover:text-lime-600 transition focus:outline-none focus:ring-2 focus:ring-lime-400">Vegetables</button>
+        <button aria-pressed="false" class="px-4 py-1 rounded-full bg-gray-200 text-gray-600 hover:bg-lime-100 hover:text-lime-600 transition focus:outline-none focus:ring-2 focus:ring-lime-400">Fruits</button>
+        <button aria-pressed="false" class="px-4 py-1 rounded-full bg-gray-200 text-gray-600 hover:bg-lime-100 hover:text-lime-600 transition focus:outline-none focus:ring-2 focus:ring-lime-400">Bread</button>
+        <button aria-pressed="false" class="px-4 py-1 rounded-full bg-gray-200 text-gray-600 hover:bg-lime-100 hover:text-lime-600 transition focus:outline-none focus:ring-2 focus:ring-lime-400">Meat</button>
+      </nav>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <!-- Card 1 -->
+      <article class="product-card bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden flex flex-col transition-transform">
+        <div class="relative">
+          <img src="https://placehold.co/400x300/f7f3e7/fbbf24?text=Grapes" alt="Fresh green and white grapes on bunch with natural sunlight on white background" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=Image+Not+Found';" />
+          <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-semibold rounded-full px-2 py-0.5 text-white select-none">Fruits</span>
+        </div>
+        <div class="p-4 flex flex-col flex-grow">
+          <h4 class="text-gray-800 font-semibold text-lg mb-1">Grapes</h4>
+          <p class="text-gray-500 text-sm mb-3 flex-grow">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-lime-600 text-lg">$4.99 / kg</span>
+            <button class="bg-lime-600 text-white text-sm font-semibold rounded-full px-3 py-1 hover:bg-lime-700 transition flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-lime-500">
+              Add to cart
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                <circle cx="7" cy="21" r="1" />
+                <circle cx="17" cy="21" r="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="product-card bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden flex flex-col transition-transform">
+        <div class="relative">
+          <img src="https://placehold.co/400x300/f7f3e7/fbbf24?text=Grapes" alt="Fresh green and white grapes on bunch with natural sunlight on white background" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=Image+Not+Found';" />
+          <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-semibold rounded-full px-2 py-0.5 text-white select-none">Fruits</span>
+        </div>
+        <div class="p-4 flex flex-col flex-grow">
+          <h4 class="text-gray-800 font-semibold text-lg mb-1">Grapes</h4>
+          <p class="text-gray-500 text-sm mb-3 flex-grow">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-lime-600 text-lg">$4.99 / kg</span>
+            <button class="bg-lime-600 text-white text-sm font-semibold rounded-full px-3 py-1 hover:bg-lime-700 transition flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-lime-500">
+              Add to cart
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                <circle cx="7" cy="21" r="1" />
+                <circle cx="17" cy="21" r="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="product-card bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden flex flex-col transition-transform">
+        <div class="relative">
+          <img src="https://placehold.co/400x300/fef2f2/b91c1c?text=Raspberries" alt="Fresh ripe red raspberries close-up with natural light and soft shadows" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=Image+Not+Found';" />
+          <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-semibold rounded-full px-2 py-0.5 text-white select-none">Fruits</span>
+        </div>
+        <div class="p-4 flex flex-col flex-grow">
+          <h4 class="text-gray-800 font-semibold text-lg mb-1">Raspberries</h4>
+          <p class="text-gray-500 text-sm mb-3 flex-grow">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-lime-600 text-lg">$4.99 / kg</span>
+            <button class="bg-lime-600 text-white text-sm font-semibold rounded-full px-3 py-1 hover:bg-lime-700 transition flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-lime-500">
+              Add to cart
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                <circle cx="7" cy="21" r="1" />
+                <circle cx="17" cy="21" r="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="product-card bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden flex flex-col transition-transform">
+        <div class="relative">
+          <img src="https://placehold.co/400x300/fef3c7/dd6f10?text=Apricots" alt="Fresh orange apricots close-up with natural texture and soft morning sunlight" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300?text=Image+Not+Found';" />
+          <span class="absolute top-2 left-2 bg-yellow-400 text-xs font-semibold rounded-full px-2 py-0.5 text-white select-none">Fruits</span>
+        </div>
+        <div class="p-4 flex flex-col flex-grow">
+          <h4 class="text-gray-800 font-semibold text-lg mb-1">Apricots</h4>
+          <p class="text-gray-500 text-sm mb-3 flex-grow">Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod te incididunt</p>
+          <div class="flex items-center justify-between">
+            <span class="font-semibold text-lime-600 text-lg">$4.99 / kg</span>
+            <button class="bg-lime-600 text-white text-sm font-semibold rounded-full px-3 py-1 hover:bg-lime-700 transition flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-lime-500">
+              Add to cart
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4" />
+                <circle cx="7" cy="21" r="1" />
+                <circle cx="17" cy="21" r="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <script>
+    const carouselSlide = document.getElementById('heroCarousel');
+    const slidesCount = carouselSlide.children.length;
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      carouselSlide.style.transform = `translateX(${-currentIndex * 100}%)`;
+    }
+
+    function moveSlide(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) {
+        currentIndex = slidesCount - 1;
+      } else if (currentIndex >= slidesCount) {
+        currentIndex = 0;
+      }
+      updateCarousel();
+    }
+
+    // Optional: auto-slide every 5 seconds
+    setInterval(() => {
+      moveSlide(1);
+    }, 5000);
+  </script>
+</body>
+</html>
+
